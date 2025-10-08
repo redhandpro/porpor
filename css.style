@@ -1,0 +1,52 @@
+:root{
+  --bg: #f7f7fb;
+  --card: #ffffff;
+  --accent: #4f46e5;
+  --text: #111827;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+  padding:1rem;
+}
+
+.site-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:1rem;
+}
+.site-header h1{margin:0;font-size:1.25rem}
+.site-header nav a{
+  margin-left:0.75rem;
+  text-decoration:none;
+  color:var(--accent);
+}
+
+.card{
+  background:var(--card);
+  padding:1rem;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(16,24,40,0.06);
+  margin-bottom:1rem;
+}
+
+button{
+  padding:.5rem .8rem;
+  border-radius:8px;
+  border:0;
+  cursor:pointer;
+  background:var(--accent);
+  color:white;
+}
+
+.site-footer{text-align:center;margin-top:1rem;color:#6b7280}
+label{display:block;margin:0.5rem 0}
+input{padding:0.4rem;border-radius:6px;border:1px solid #e5e7eb}
