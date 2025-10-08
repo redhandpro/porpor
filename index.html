@@ -40,6 +40,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+      gap: 1.5rem;
     }
 
     .content h1 {
@@ -49,25 +50,33 @@
       background: linear-gradient(90deg, #ff6a00, #ff0099);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ✅ دکمه‌ها کوچیک‌تر و افقی */
+    .button-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .gradient-btn {
-      padding: 0.8rem 1.8rem;
+      padding: 0.4rem 1rem;
       border: none;
-      border-radius: 50px;
+      border-radius: 30px;
       background: linear-gradient(135deg, #ff0099, #ff6a00);
       color: #fff;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.3s;
-      box-shadow: 0 0 20px rgba(255, 100, 0, 0.4);
+      box-shadow: 0 0 15px rgba(255, 100, 0, 0.4);
     }
 
     .gradient-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255, 100, 0, 0.6);
+      transform: scale(1.07);
+      box-shadow: 0 0 20px rgba(255, 100, 0, 0.6);
     }
 
     /* UI panels hidden (فقط بک‌گراند استفاده میشه) */
@@ -80,13 +89,15 @@
   <div id="container"></div>
   <div class="glow"></div>
 
-  <!-- 🔹 متن و دکمه -->
+  <!-- 🔹 متن و دکمه‌ها -->
   <div class="content">
     <h1>Sina Aghhajary</h1>
-    <button class="gradient-btn">Explore More</button>
-    <button class="gradient-btn">call me</button>
-    <button class="gradient-btn">about me</button
-    <button class="gradient-btn">tex me</button>
+    <div class="button-group">
+      <button class="gradient-btn">Explore More</button>
+      <button class="gradient-btn">Call Me</button>
+      <button class="gradient-btn">About Me</button>
+      <button class="gradient-btn">Text Me</button>
+    </div>
   </div>
 
   <!-- 🔹 کتابخانه‌ها -->
@@ -99,7 +110,7 @@
     }
   </script>
 
-  <!-- 🔹 اسکریپت اصلی (همون کد تو) -->
+  <!-- 🔹 افکت سه‌بعدی -->
   <script type="module">
     import * as THREE from 'three';
     import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
@@ -117,25 +128,24 @@
     function createStarPath(i, total) {
       const numStarPoints = 5;
       const outerRadius = 35, innerRadius = 15;
-      const scale = 1.0;
       const zDepth = 4;
-      const starVertices = [];
+      const vertices = [];
       for (let j = 0; j < numStarPoints; j++) {
         let angle = (j / numStarPoints) * Math.PI * 2 - Math.PI / 2;
-        starVertices.push(new THREE.Vector2(outerRadius * Math.cos(angle), outerRadius * Math.sin(angle)));
+        vertices.push(new THREE.Vector2(outerRadius * Math.cos(angle), outerRadius * Math.sin(angle)));
         angle += Math.PI / numStarPoints;
-        starVertices.push(new THREE.Vector2(innerRadius * Math.cos(angle), innerRadius * Math.sin(angle)));
+        vertices.push(new THREE.Vector2(innerRadius * Math.cos(angle), innerRadius * Math.sin(angle)));
       }
-      const segs = starVertices.length;
+      const segs = vertices.length;
       const t = (i / total) * segs;
       const idx = Math.floor(t) % segs;
       const prog = t - Math.floor(t);
-      const a = starVertices[idx];
-      const b = starVertices[(idx + 1) % segs];
+      const a = vertices[idx];
+      const b = vertices[(idx + 1) % segs];
       const x = THREE.MathUtils.lerp(a.x, b.x, prog);
       const y = THREE.MathUtils.lerp(a.y, b.y, prog);
       const z = Math.sin((i / total) * Math.PI * 4) * (zDepth / 2);
-      return new THREE.Vector3(x * scale, y * scale, z);
+      return new THREE.Vector3(x, y, z);
     }
 
     function init() {
