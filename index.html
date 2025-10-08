@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>سایت نمونه من</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>به سایت من خوش آمدی!</h1>
+    <nav>
+      <a href="#home">خانه</a>
+      <a href="#about">درباره</a>
+      <a href="#contact">تماس</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="card">
+      <h2>صفحهٔ اصلی</h2>
+      <p>این یک سایت نمونه است ساخته‌شده با HTML، CSS و JS و منتشر شده روی GitHub Pages.</p>
+      <button id="helloBtn">سلام بده</button>
+    </section>
+
+    <section id="about" class="card">
+      <h2>درباره من</h2>
+      <p>اینجا می‌تونی توضیحات کوتاه دربارهٔ خودت یا پروژه‌ات بذاری.</p>
+    </section>
+
+    <section id="contact" class="card">
+      <h2>تماس</h2>
+      <form id="contactForm">
+        <label>نام:<input type="text" id="name" required></label><br>
+        <label>ایمیل:<input type="email" id="email" required></label><br>
+        <button type="submit">ارسال</button>
+      </form>
+      <div id="msg"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© ۲۰۲۵ — ساخته‌شده با ❤️</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
