@@ -37,6 +37,27 @@
  
 
   <style>
+    #particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #000010 0%, #000000 100%);
+  z-index: 0;
+}
+
+    /* 🔹 Canvas پس‌زمینه پارتیکل‌ها */
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #000010 0%, #000000 100%);
+  z-index: 0;
+}
+
     /* 🔹 انیمیشن ورود عناصر صفحه */
 @keyframes fadeSlideUp {
   0% {
@@ -348,108 +369,174 @@
   <button class="gradient-btn">Call Me</button>
   <button class="gradient-btn">About Me</button>
   <button class="gradient-btn">Text Me</button>
+      <!-- 🔹 افکت پارتیکل واکنش‌گرا -->
+<canvas id="particles"><!-- 🔹 افکت پارتیکل دنبال‌کننده با رد نور -->
+<canvas id="particles"></canvas>
+
+<script>
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particlesArray = [];
+const colors = ["#ff0099", "#ff6a00", "#ffffff", "#ffcc00"];
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+const mouse = {
+  x: null,
+  y: null
+};
+
+window.addEventListener("mousemove", (e) => {
+  mouse.x = e.x;
+  mouse.y = e.y;
+  for (let i = 0; i < 6; i++) {
+    particlesArray.push(new Particle());
+  }
+});
+
+class Particle {
+  constructor() {
+    this.x = mouse.x;
+    this.y = mouse.y;
+    this.size = Math.random() * 4 + 1;
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+    this.speedX = Math.random() * 3 - 1.5;
+    this.speedY = Math.random() * 3 - 1.5;
+    this.life = 100;
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.size *= 0.96; // ذره‌ها کم‌کم کوچیک میشن
+    this.life -= 2;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = this.color;
+    ctx.fill();
+  }
+}
+
+function animate() {
+  // این خط باعث میشه رد نوری بمونه
+  ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < particlesArray.length; i++) {
+    particlesArray[i].update();
+    particlesArray[i].draw();
+
+    if (particlesArray[i].life <= 0 || particlesArray[i].size < 0.3) {
+      particlesArray.splice(i, 1);
+      i--;
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+</canvas>
+
+<script>
+<!-- 🔹 افکت پارتیکل دنبال‌کننده با رد نور -->
+<canvas id="particles"></canvas>
+
+<script>
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particlesArray = [];
+const colors = ["#ff0099", "#ff6a00", "#ffffff", "#ffcc00"];
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+const mouse = {
+  x: null,
+  y: null
+};
+
+window.addEventListener("mousemove", (e) => {
+  mouse.x = e.x;
+  mouse.y = e.y;
+  for (let i = 0; i < 6; i++) {
+    particlesArray.push(new Particle());
+  }
+});
+
+class Particle {
+  constructor() {
+    this.x = mouse.x;
+    this.y = mouse.y;
+    this.size = Math.random() * 4 + 1;
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+    this.speedX = Math.random() * 3 - 1.5;
+    this.speedY = Math.random() * 3 - 1.5;
+    this.life = 100;
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.size *= 0.96; // ذره‌ها کم‌کم کوچیک میشن
+    this.life -= 2;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = this.color;
+    ctx.fill();
+  }
+}
+
+function animate() {
+  // این خط باعث میشه رد نوری بمونه
+  ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < particlesArray.length; i++) {
+    particlesArray[i].update();
+    particlesArray[i].draw();
+
+    if (particlesArray[i].life <= 0 || particlesArray[i].size < 0.3) {
+      particlesArray.splice(i, 1);
+      i--;
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</script>
+
 </div>
 
   </div>
 
   <!-- 🔹 کتابخانه‌ها -->
   <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"
-      }
-    }
-  </script>
-
-  <!-- 🔹 افکت سه‌بعدی -->
-  <script type="module">
-    import * as THREE from 'three';
-    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
-    import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-
-    let scene, camera, renderer, particles, composer;
-    let time = 0;
-    const particleCount = 10000;
-
-    init();
-    animate();
-
-    function createStarPath(i, total) {
-      const numStarPoints = 5;
-      const outerRadius = 35, innerRadius = 15;
-      const zDepth = 4;
-      const vertices = [];
-      for (let j = 0; j < numStarPoints; j++) {
-        let angle = (j / numStarPoints) * Math.PI * 2 - Math.PI / 2;
-        vertices.push(new THREE.Vector2(outerRadius * Math.cos(angle), outerRadius * Math.sin(angle)));
-        angle += Math.PI / numStarPoints;
-        vertices.push(new THREE.Vector2(innerRadius * Math.cos(angle), innerRadius * Math.sin(angle)));
-      }
-      const segs = vertices.length;
-      const t = (i / total) * segs;
-      const idx = Math.floor(t) % segs;
-      const prog = t - Math.floor(t);
-      const a = vertices[idx];
-      const b = vertices[(idx + 1) % segs];
-      const x = THREE.MathUtils.lerp(a.x, b.x, prog);
-      const y = THREE.MathUtils.lerp(a.y, b.y, prog);
-      const z = Math.sin((i / total) * Math.PI * 4) * (zDepth / 2);
-      return new THREE.Vector3(x, y, z);
-    }
-
-    function init() {
-      scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1500);
-      camera.position.z = 90;
-
-      renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      document.getElementById('container').appendChild(renderer.domElement);
-
-      composer = new EffectComposer(renderer);
-      composer.addPass(new RenderPass(scene, camera));
-      const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.4, 0.4, 0.8);
-      composer.addPass(bloomPass);
-      composer.addPass(new OutputPass());
-
-      const geometry = new THREE.BufferGeometry();
-      const positions = new Float32Array(particleCount * 3);
-      for (let i = 0; i < particleCount; i++) {
-        const pos = createStarPath(i, particleCount);
-        positions[i * 3] = pos.x;
-        positions[i * 3 + 1] = pos.y;
-        positions[i * 3 + 2] = pos.z;
-      }
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      const material = new THREE.PointsMaterial({
-        color: 0xff6600,
-        size: 2.2,
-        transparent: true,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false
-      });
-      particles = new THREE.Points(geometry, material);
-      scene.add(particles);
-
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        composer.setSize(window.innerWidth, window.innerHeight);
-      });
-    }
-
-    function animate() {
-      requestAnimationFrame(animate);
-      time += 0.02;
-      particles.rotation.y += 0.0015;
-      particles.rotation.x += 0.0008;
-      composer.render();
-    }
+   
   </script>
   <!-- 🔹 Footer -->
 <footer class="footer">
