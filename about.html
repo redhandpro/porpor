@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me | Sina Aghhajary</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* استایل مخصوص این صفحه */
+    .about-container {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.4);
+      animation: fadeSlideIn 1.2s ease forwards;
+      color: #fff;
+    }
+
+    .about-container h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, #ff6a00, #ff0099);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .about-container p {
+      max-width: 700px;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .skill {
+      background: linear-gradient(135deg, #ff0099, #ff6a00);
+      color: #fff;
+      padding: 0.6rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 0 10px rgba(255,100,0,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .skill:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255,100,0,0.6);
+    }
+
+    .back-btn {
+      margin-top: 2rem;
+      padding: 0.8rem 1.4rem;
+      border-radius: 50px;
+      border: none;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(135deg, #ff0099, #ff6a00);
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+  <div class="glow"></div>
+
+  <section class="about-container">
+    <h1>درباره‌ی من</h1>
+    <p>
+      سلام! من <strong>sina aghajary</strong> هستم — توسعه‌دهنده‌ی وب و طراح رابط کاربری که عاشق ساختن تجربه‌های دیجیتال خلاق و چشم‌نوازم.
+     از تکنولوژی‌هایی مثل <strong>ai</strong> و <strong>python</strong> هست.
+    </p>
+
+    <div class="skills">
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">python</div>
+      <div class="skill">UI/UX Design</div>
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='index.html'">بازگشت به صفحه اصلی</button>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 <span class="gradient-text">Sina Aghhajary</span> — All Rights Reserved.</p>
+  </footer>
+
+  <!-- کتابخانه Three.js -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <!-- اجرای پس‌زمینه مشابه صفحه اصلی -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
