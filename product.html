@@ -13,6 +13,7 @@
     .price { font-size:1.5rem; font-weight:600; margin-bottom:2rem; }
     .buy-btn { padding:12px 25px; border:none; border-radius:50px; background: linear-gradient(135deg, #ff0099, #ff6a00); color:#fff; font-size:1rem; cursor:pointer; transition:0.3s; }
     .buy-btn:hover { transform: scale(1.05); box-shadow:0 0 25px rgba(255,100,0,0.6); }
+    #download-section { display:none; margin-top:20px; }
   </style>
 </head>
 <body>
@@ -20,11 +21,20 @@
   <div class="product-card">
     <h1>📘 بسته طلایی پرامپت‌های ChatGPT</h1>
     <p>۲۰ پرامپت حرفه‌ای برای تولید محتوا در اینستاگرام، شبکه‌های اجتماعی و وبلاگ</p>
-    <p class="price">💰 قیمت: 200,000 تومان</p>
-    <a href="https://idpay.ir/username/50000" target="_blank">
-      <button class="buy-btn">💳 خرید و دریافت فایل</button>
+    <p class="price">💰 قیمت: 100.000 تومان</p>
+
+    <!-- دکمه خرید Remit -->
+    <a id="buy-link" https://reymit.ir/payforshop" target="_blank">
+      <button class="buy-btn">💳 خرید و پرداخت</button>
     </a>
-    <p style="margin-top:15px; font-size:0.9rem; color:#ccc;">بعد از پرداخت لینک دانلود به شما نمایش داده می‌شود.</p>
+
+    <!-- بخش دانلود بعد از پرداخت موفق -->
+    <div id="download-section">
+      <a href="https://drive.google.com/yourfilelink" target="_blank">
+        <button class="buy-btn">⬇️ دانلود فایل</button>
+      </a>
+      <p style="margin-top:10px; font-size:0.9rem; color:#ccc;">لینک دانلود فقط بعد از پرداخت نمایش داده می‌شود.</p>
+    </div>
   </div>
 
   <!-- Footer مشابه صفحه اصلی -->
@@ -36,6 +46,17 @@
       <a href="#" target="_blank">Telegram</a>
     </div>
   </footer>
+
+  <script>
+    // بررسی پارامتر URL بعد از پرداخت موفق
+    const urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.get('status') === 'success'){
+      document.getElementById('download-section').style.display = 'block';
+      alert('پرداخت موفق! لینک دانلود برای شما فعال شد.');
+      // اختیاری: پنهان کردن دکمه خرید بعد از پرداخت
+      document.getElementById('buy-link').style.display = 'none';
+    }
+  </script>
 
 </body>
 </html>
